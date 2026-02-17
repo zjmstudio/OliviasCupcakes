@@ -122,7 +122,7 @@
   .introCard {
     grid-template-columns: 1fr;
 
-    /* Balanced vertical padding */
+   
     padding: 50px 26px 50px;
 
     gap: 22px;
