@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "../../styles/MenuAssemblyLine.css";
+import "../../styles/menuAssemblyLine.css";
 
 import cupcake1 from "../../assets/images/cupcake1_chocolate.png";
 import cupcake2 from "../../assets/images/cupcake2_caramel.png";
