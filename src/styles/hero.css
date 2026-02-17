@@ -34,7 +34,7 @@
 .heroSubtitle {
   margin: 18px 0 30px;
   color: var(--hero-green);
- font-family: "Arapey", serif;
+  font-family: "Arapey", serif;
   font-size: clamp(50px, 5.6vw, 74px);
   font-weight: 700;
   line-height: 1.05;
@@ -53,14 +53,55 @@
   text-decoration: none;
   border-radius: 0;
   border: 3px solid var(--hero-green);
-  transition: background 0.15s ease, color 0.15s ease;
+  transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease;
 }
 
 .heroBtn:hover {
   background: transparent;
   color: var(--hero-green);
+  transform: translateY(-1px);
 }
 
+.heroInner > * {
+  opacity: 0;
+  transform: translateY(18px);
+}
+
+.hero.isLoaded .heroTitle {
+  animation: heroFadeUp 1.05s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+
+}
+
+.hero.isLoaded .heroSubtitle {
+  animation: heroFadeUp 1.05s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+
+  animation-delay: 120ms;
+}
+
+.hero.isLoaded .heroBtn {
+  animation: heroFadeUp 1.05s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+
+  animation-delay: 240ms;
+}
+
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heroInner > * {
+    opacity: 1;
+    transform: none;
+    animation: none !important;
+  }
+}
 
 @media (max-width: 768px) {
   .hero {
@@ -73,8 +114,4 @@
     padding-top: 90px;
     padding-bottom: 50px;
   }
-
- /* .heroSubtitle {
-    font-size: clamp(28px, 6vw, 42px);
-  }*/
 }
