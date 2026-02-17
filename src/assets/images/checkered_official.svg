@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2400" height="1200" viewBox="0 0 2400 1200">
+  <defs>
+    <!--
+      Adjust these by scaling the numbers below if you want:
+      d = diamond bounding box size
+      step = spacing between diamond centers
+      Currently: d=80, step=80 (touching at corners; very clean)
+    -->
+    <pattern id="tile" patternUnits="userSpaceOnUse" width="160" height="160">
+      <!-- background -->
+      <rect width="160" height="160" fill="#ffffff"/>
+
+      <!-- Diamonds: points are centered at (cx,cy) with half-size = 40 -->
+      <!-- Top-left (light) -->
+      <polygon points="40,0 80,40 40,80 0,40" fill="#bcd0aa"/>
+      <!-- Top-right (dark) -->
+      <polygon points="120,0 160,40 120,80 80,40" fill="#6aa547"/>
+      <!-- Bottom-left (dark) -->
+      <polygon points="40,80 80,120 40,160 0,120" fill="#6aa547"/>
+      <!-- Bottom-right (light) -->
+      <polygon points="120,80 160,120 120,160 80,120" fill="#bcd0aa"/>
+    </pattern>
+  </defs>
+
+  <rect width="100%" height="100%" fill="url(#tile)" shape-rendering="crispEdges"/>
+</svg>

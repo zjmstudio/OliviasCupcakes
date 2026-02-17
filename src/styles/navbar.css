@@ -1,0 +1,145 @@
+:root {
+  --nav-green: #6aa547;
+  --nav-ink: #191919;
+  --nav-border: rgba(0, 0, 0, 0.1);
+  --nav-height: 104px;
+}
+
+.navWrap {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: #ffffff;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease;
+}
+
+/* add this class to navWrap when scroll starts */
+.navWrap.isScrolled {
+  border-bottom-color: var(--nav-border);
+}
+
+.navBar {
+  height: var(--nav-height);
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  align-items: center;
+  gap: 18px;
+}
+
+.navLogo img {
+  width: 160px;
+  height: auto;
+  display: block;
+}
+
+.navLinks {
+  display: flex;
+  justify-content: center;
+  gap: 35px;
+}
+
+.navLink {
+  font-family: "Arapey", serif;
+  font-size: 15pt;
+  font-weight: bold;
+  color: var(--nav-ink);
+  text-decoration: none;
+  padding: 10px 2px;
+  position: relative;
+}
+
+
+
+.navLink:hover {
+  color: var(--nav-green);
+}
+
+.navLink:hover::after {
+  transform: scaleX(1);
+}
+
+.cartButton {
+  width: 44px;
+  height: 44px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.cartButton img {
+  width: 27px;
+  height: 27px;
+  display: block;
+}
+
+.hamburger {
+  display: none;
+  width: 44px;
+  height: 44px;
+  background: transparent;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.hamburger span {
+  display: block;
+  height: 3px;
+  margin: 5px 0;
+  background: var(--nav-green);
+  border-radius: 2px;
+}
+
+.mobilePanel {
+  display: none;
+  background: #ffffff;
+  border-bottom: 1px solid var(--nav-border);
+}
+
+.mobilePanel.open {
+  display: block;
+}
+
+.mobileLinks {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 16px 20px 20px;
+  display: grid;
+  gap: 14px;
+}
+
+.mobileLink {
+  font-family: "Arapey", serif;
+  font-size: 16pt;
+  color: var(--nav-ink);
+  text-decoration: none;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.mobileLink.isActive {
+  border-bottom: 2px solid var(--nav-green);
+}
+
+@media (max-width: 900px) {
+  .navLinks {
+    display: none;
+  }
+
+  .cartButton {
+    display: none;
+  }
+
+  .hamburger {
+    display: inline-block;
+    justify-self: end;
+  }
+}

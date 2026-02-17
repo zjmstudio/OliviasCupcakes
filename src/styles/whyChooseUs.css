@@ -1,0 +1,64 @@
+.whySection {
+  padding: 70px 0;
+  background: #ffffff;
+}
+
+.whyWrap {
+  width: min(1120px, calc(100% - 40px));
+  margin: 0 auto;
+  
+}
+
+.whySection .h3 {
+  text-align: center;
+  
+}
+
+.whyGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 26px;
+  align-items: start;
+  padding-top: 25px;
+}
+
+
+.whyItem {
+  text-align: center;
+  padding: 10px 8px;
+}
+
+
+.whyIcon {
+  width: 70px;
+  height: 70px;
+  margin: 0 auto 12px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: #eef0ec;
+}
+
+.whyIcon img {
+  width: 42px;
+  height: 42px;
+  display: block;
+}
+
+
+
+
+@media (max-width: 900px) {
+  .whySection {
+    padding: 60px 0;
+  }
+
+  .whyGrid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .whyItem {
+    padding: 8px 50px;
+  }
+}

@@ -1,0 +1,206 @@
+.menuSection {
+  padding: 86px 0 90px;
+  background: #ffffff;
+}
+
+.menuWrap {
+  width: min(1120px, calc(100% - 40px));
+  margin: 0 auto;
+  text-align: center;
+}
+
+.menuHeading {
+  margin-bottom: 28px;
+}
+
+.menuRail {
+  position: relative;
+  display: block;
+  overflow: visible;
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.menuArrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 56px;
+  height: 56px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: #ffffff;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  color: var(--text);
+  font-size: 32px;
+  line-height: 1;
+  transition: border-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
+  z-index: 5;
+}
+
+.menuArrow span {
+  display: inline-block;
+  transform: translateY(-1px);
+}
+
+.menuArrow:first-of-type {
+  left: -84px;
+}
+
+.menuArrow:last-of-type {
+  right: -84px;
+}
+
+.menuArrow:hover {
+  border-color: var(--green);
+  color: var(--green);
+  transform: translateY(-50%) translateY(-1px);
+}
+
+.menuTrack {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 26px;
+  padding: 44px 0 16px;
+  overflow: visible;
+  margin: 0 auto;
+}
+
+.menuItem {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  transform-origin: center bottom;
+  transition: transform 0.22s ease, filter 0.22s ease;
+}
+
+.menuItem.isFar {
+  transform: scale(0.85);
+  filter: brightness(0.75) saturate(0.7);
+}
+
+.menuItem.isNear {
+  transform: scale(0.95);
+  filter: brightness(0.9) saturate(0.9);
+}
+
+.menuItem.isCenter {
+  transform: scale(1.32) translateY(8px);
+  filter: none;
+  z-index: 2;
+}
+
+.menuItem img {
+  width: 185px;
+  height: 235px;
+  object-fit: contain;
+  display: block;
+  background: transparent;
+}
+
+.menuItem.isCenter img {
+  width: 240px;
+  height: 300px;
+}
+
+.menuMeta {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.menuMeta h4 {
+  margin-bottom: 6px;
+}
+
+.menuAdd {
+  margin-top: 14px;
+  padding: 10px 22px;
+  border-radius: 999px;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease,
+    background 0.15s ease, transform 0.15s ease;
+}
+
+.menuAdd:hover {
+  border-color: var(--green);
+  color: var(--green);
+  background: rgba(106, 165, 71, 0.06);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 900px) {
+  .menuRail {
+    max-width: 760px;
+  }
+
+  .menuArrow {
+    width: 50px;
+    height: 50px;
+  }
+
+  .menuTrack {
+    padding: 38px 0 14px;
+    gap: 18px;
+  }
+
+  .menuItem img {
+    width: 155px;
+    height: 210px;
+  }
+
+  .menuItem.isCenter img {
+    width: 210px;
+    height: 270px;
+  }
+
+  .menuItem.isCenter {
+    transform: scale(1.22) translateY(6px);
+  }
+}
+
+@media (max-width: 560px) {
+  .menuSection {
+    padding: 50px 0 78px;
+  }
+
+  .menuRail {
+    max-width: 100%;
+    padding: 0 16px;
+  }
+
+  .menuArrow:first-of-type {
+    left: 8px;
+  }
+
+  .menuArrow:last-of-type {
+    right: 8px;
+  }
+
+  .menuTrack {
+    padding: 34px 0 12px;
+    gap: 0;
+  }
+
+  .menuItem.isCenter img {
+    width: 245px;
+    height: 315px;
+  }
+
+  .menuItem.isCenter {
+    transform: scale(1.12) translateY(4px);
+  }
+}

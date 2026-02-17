@@ -1,0 +1,174 @@
+.introSection {
+  background: #eef0ec;
+  padding: 80px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.introSection::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("/assets/images/sprinkles_bg.png");
+  background-size: cover;
+  background-position: center;
+ 
+  pointer-events: none;
+ 
+}
+
+.introWrap {
+  width: min(1120px, calc(100% - 40px));
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.introCard {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 34px;
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 34px;
+  align-items: center;
+}
+
+.introMedia {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.introLottie {
+  width: min(450px, 100%);
+  height: auto;
+}
+
+.introContent {
+  text-align: left;
+}
+
+.introEyebrow {
+  margin: 0 0 10px;
+  color: #6aa547;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.introTitle {
+  margin: 0 0 12px;
+  font-family: "Arapey", serif;
+  color: #191919;
+  font-size: 42px;
+  line-height: 1.1;
+}
+
+.introText {
+  margin: 0;
+  color: #191919;
+  font-size: 16px;
+  line-height: 1.6;
+  max-width: 56ch;
+}
+
+.introCtas {
+  margin-top: 25px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.introBtn {
+  width: 222px;
+  height: 52px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #6aa547;
+  color: #ffffff;
+  font-size: 17px;
+  font-weight: 800;
+  text-decoration: none;
+  border-radius: 0;
+  border: 3px solid #6aa547;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.introBtn:hover {
+  background: transparent;
+  color: #6aa547;
+}
+
+.introLink {
+  color: #6aa547;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.introLink:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 900px) {
+  .introSection {
+    padding: 70px 0; 
+  }
+
+  .introCard {
+    grid-template-columns: 1fr;
+
+    /* Balanced vertical padding */
+    padding: 50px 26px 50px;
+
+    gap: 22px;
+    text-align: center;
+  }
+
+  .introMedia {
+    margin-top: -25px; 
+  }
+
+  .introContent {
+    text-align: center;
+  }
+
+  .introText {
+    margin: 0 auto;
+  }
+
+  .introCtas {
+    justify-content: center;
+  }
+
+  .introLottie {
+    width: min(380px, 100%);
+  }
+
+  .introTitle {
+    font-size: 35px;
+  }
+
+
+  .introEyebrow {
+    margin-top: -25px !important;
+  }
+}
+
+
+
+@media (max-width: 768px) {
+ .introTitle {
+  font-size: 35px;
+ }
+
+ .introSection::before {
+  background-position: top left;
+ }
+
+ 
+}
