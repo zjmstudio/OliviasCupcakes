@@ -1,4 +1,4 @@
-import "../../styles/Catering.css";
+import "../../styles/catering.css";
 import boxImg from "../../assets/images/box.jpg";
 
 export default function Catering() {
