@@ -53,7 +53,7 @@
   box-shadow: 0 18px 42px rgba(0, 0, 0, 0.10);
 }
 
-/* REVEAL ANIMATION */
+
 .cateringRevealTitle,
 .cateringRevealText,
 .cateringRevealActions {
@@ -82,7 +82,7 @@
   transition-delay: 280ms;
 }
 
-/* Reduced motion */
+
 @media (prefers-reduced-motion: reduce) {
   .cateringRevealTitle,
   .cateringRevealText,
