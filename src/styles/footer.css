@@ -37,6 +37,7 @@
 
 .footerDesc {
   margin: 0;
+  font-size: 15px;
   padding-right: 100px;
   color: var(--footerText);
 }
@@ -91,7 +92,7 @@
 }
 
 .footerRowText {
-  font-size: 16px;
+  font-size: 15px;
   line-height: 1.55;
 }
 
@@ -210,7 +211,7 @@
   }
 
   .footerLink {
-    font-size: 18px;
+    font-size: 19px;
   }
 
   .footerDesc,
