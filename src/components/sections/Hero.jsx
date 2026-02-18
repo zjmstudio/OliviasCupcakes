@@ -6,8 +6,7 @@ export default function Hero() {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    const t = requestAnimationFrame(() => setLoaded(true));
-    return () => cancelAnimationFrame(t);
+    setLoaded(true);
   }, []);
 
   return (
@@ -17,8 +16,10 @@ export default function Hero() {
       style={{ backgroundImage: `url(${heroImg})` }}
     >
       <div className="heroInner">
-        <h1 className="heroTitle">Delicious Cupcakes</h1>
-        <p className="heroSubtitle">Baked Fresh Daily</p>
+        <h1 className="heroTitle">
+          <span className="heroLine1">Delicious Cupcakes</span>
+          <span className="heroAccent">Baked Fresh Daily</span>
+        </h1>
         <a className="heroBtn" href="#menu">
           Order Now
         </a>
