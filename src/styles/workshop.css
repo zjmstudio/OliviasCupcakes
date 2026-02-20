@@ -1,0 +1,193 @@
+
+:root {
+  --workshop-ink: #191919;
+  --workshop-muted: rgba(25, 25, 25, 0.6);
+  --workshop-line: rgba(25, 25, 25, 0.12);
+  --workshop-bg: #ffffff;
+  --workshop-card: #fbfbfb;
+}
+
+.workshop {
+  background: var(--workshop-bg);
+  color: var(--workshop-ink);
+  padding: 72px 0;
+}
+
+.workshopInner {
+  width: min(1120px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+
+
+.builder {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 28px;
+  align-items: start;
+}
+
+.controls {
+  background: var(--workshop-card);
+  border: 1px solid var(--workshop-line);
+  border-radius: 18px;
+  padding: 18px;
+}
+
+.row {
+  padding: 14px 10px;
+  border-bottom: 1px solid var(--workshop-line);
+}
+
+.row:last-child {
+  border-bottom: 0;
+}
+
+.rowLabel {
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--workshop-muted);
+  margin-bottom: 10px;
+}
+
+.rowControl {
+  display: grid;
+  grid-template-columns: 42px 1fr 42px;
+  align-items: center;
+  gap: 10px;
+}
+
+.arrowBtn {
+  height: 42px;
+  width: 42px;
+  border-radius: 12px;
+  border: 1px solid var(--workshop-line);
+  background: #fff;
+  color: var(--workshop-ink);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.arrowBtn:hover {
+  transform: translateY(-1px);
+}
+
+.rowValue {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.stageFrame {
+  width: min(520px, 100%);
+  aspect-ratio: 1 / 1;
+  position: relative;
+  border-radius: 22px;
+  border: 1px solid var(--workshop-line);
+  overflow: hidden;
+  background: #fff;
+}
+
+.stageBg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(closest-side at 50% 38%, rgba(25, 25, 25, 0.08), transparent 70%),
+    linear-gradient(to bottom, rgba(25, 25, 25, 0.03), transparent 35%);
+}
+
+.cupcakeStack {
+  position: absolute;
+  inset: 0;
+}
+
+.layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: opacity 180ms ease;
+  user-select: none;
+  pointer-events: none;
+}
+
+.placeholder {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 28px;
+  color: var(--workshop-muted);
+  font-size: 14px;
+}
+
+.placeholder span {
+  display: block;
+  margin-top: 6px;
+  color: var(--workshop-ink);
+  font-weight: 600;
+}
+
+.addToCart {
+  width: min(520px, 100%);
+  height: 52px;
+  border-radius: 16px;
+  border: 1px solid var(--workshop-line);
+  background: #fff;
+  color: var(--workshop-ink);
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.addToCart:hover {
+  transform: translateY(-1px);
+}
+
+.layerMissing {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+
+.layerMissingInner {
+  font-size: 12px;
+  padding: 8px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(25, 25, 25, 0.12);
+  color: rgba(25, 25, 25, 0.75);
+}
+
+@media (max-width: 900px) {
+  .builder {
+    grid-template-columns: 1fr;
+  }
+
+  .controls {
+    order: 2;
+  }
+
+  .stage {
+    order: 1;
+  }
+}
+

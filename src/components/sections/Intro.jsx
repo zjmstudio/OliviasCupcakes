@@ -1,11 +1,13 @@
+// src/components/sections/Intro.jsx
 import { useEffect, useRef, useState } from "react";
 import Lottie from "lottie-react";
+import { Link } from "react-router-dom";
 import cupcakeAnim from "../../assets/images/cupcake animation_official.json";
 import "../../styles/intro.css";
 
 export default function Intro() {
-  const animRef = useRef();
-  const sectionRef = useRef();
+  const animRef = useRef(null);
+  const sectionRef = useRef(null);
   const [hasPlayed, setHasPlayed] = useState(false);
 
   useEffect(() => {
@@ -48,10 +50,9 @@ export default function Intro() {
             </p>
 
             <div className="introCtas">
-              <a className="btnPrimary" href="#menu">
+              <Link to="/workshop" className="btnPrimary">
                 Build Your Cupcake
-              </a>
-           
+              </Link>
             </div>
           </div>
         </div>

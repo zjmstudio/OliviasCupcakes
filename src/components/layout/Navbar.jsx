@@ -1,24 +1,36 @@
+// src/components/layout/Navbar.jsx
 import { useEffect, useState } from "react";
+import { NavLink, useLocation } from "react-router-dom";
+
 import logo from "../../assets/logo/olivias logo green.svg";
 import cartBlack from "../../assets/icons/shopping cart_black.svg";
 import cartGreen from "../../assets/icons/shopping cart_green.svg";
 
-const LINKS = [
-  { label: "About", href: "#whychooseus", id: "whychooseus" },
-  { label: "Our Menu", href: "#menu", id: "menu" },
-  { label: "Catering", href: "#catering", id: "catering" },
-  { label: "Locations", href: "#", id: null },
-  { label: "Contact", href: "#", id: "null" },
+const NAV_ITEMS = [
+  { label: "Menu", type: "anchor", href: "#menu", id: "menu" },
+  { label: "Catering", type: "anchor", href: "#catering", id: "catering" },
+  { label: "Locations", type: "anchor", href: "#", id: null },
+  { label: "Contact", type: "anchor", href: "#", id: null },
+  { label: "Cupcake Workshop", type: "route", to: "/workshop" },
 ];
 
 export default function Navbar() {
+  const location = useLocation();
+
   const [active, setActive] = useState(null);
   const [open, setOpen] = useState(false);
   const [cartHover, setCartHover] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
+  // Scroll spy only on homepage
   useEffect(() => {
-    const ids = LINKS.filter((l) => l.id).map((l) => l.id);
+    if (location.pathname !== "/") {
+      setActive(null);
+      setIsScrolled(false);
+      return;
+    }
+
+    const ids = NAV_ITEMS.filter((i) => i.type === "anchor" && i.id).map((i) => i.id);
 
     const onScroll = () => {
       const y = window.scrollY + 120;
@@ -38,36 +50,62 @@ export default function Navbar() {
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [location.pathname]);
 
-  const handleNavClick = (id) => {
+  const handleAnchorClick = (id) => {
     if (id) setActive(id);
     setOpen(false);
+  };
+
+  const handleRouteClick = () => {
+    setActive(null);
+    setOpen(false);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const renderLink = (item, mobile = false) => {
+    const className = mobile ? "mobileLink" : "navLink";
+
+    if (item.type === "route") {
+      return (
+        <NavLink
+          key={item.label}
+          to={item.to}
+          className={className}
+          onClick={handleRouteClick}
+        >
+          {item.label}
+        </NavLink>
+      );
+    }
+
+    return (
+      <a
+        key={item.label}
+        href={item.href}
+        className={`${className} ${item.id && active === item.id ? "isActive" : ""}`}
+        onClick={() => handleAnchorClick(item.id)}
+      >
+        {item.label}
+      </a>
+    );
   };
 
   return (
     <header className={`navWrap ${isScrolled ? "isScrolled" : ""}`}>
       <div className="navBar">
-        <a
-          className="navLogo"
-          href="#top"
-          aria-label="Olivia’s home"
-          onClick={() => setOpen(false)}
-        >
-          <img src={logo} alt="Olivia’s" />
-        </a>
+        {location.pathname === "/" ? (
+          <a className="navLogo" href="#top" onClick={() => setOpen(false)}>
+            <img src={logo} alt="Olivia’s" />
+          </a>
+        ) : (
+          <NavLink className="navLogo" to="/" onClick={handleRouteClick}>
+            <img src={logo} alt="Olivia’s" />
+          </NavLink>
+        )}
 
         <nav className="navLinks" aria-label="Primary navigation">
-          {LINKS.map((l) => (
-            <a
-              key={l.label}
-              href={l.href}
-              className={`navLink ${l.id && active === l.id ? "isActive" : ""}`}
-              onClick={() => handleNavClick(l.id)}
-            >
-              {l.label}
-            </a>
-          ))}
+          {NAV_ITEMS.map((item) => renderLink(item))}
         </nav>
 
         <button
@@ -77,18 +115,13 @@ export default function Navbar() {
           onMouseEnter={() => setCartHover(true)}
           onMouseLeave={() => setCartHover(false)}
         >
-          <img
-            src={cartHover ? cartGreen : cartBlack}
-            alt=""
-            aria-hidden="true"
-          />
+          <img src={cartHover ? cartGreen : cartBlack} alt="" aria-hidden />
         </button>
 
         <button
           className="hamburger"
           type="button"
-          aria-label={open ? "Close menu" : "Open menu"}
-          aria-expanded={open ? "true" : "false"}
+          aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
         >
           <span />
@@ -98,17 +131,8 @@ export default function Navbar() {
       </div>
 
       <div className={`mobilePanel ${open ? "open" : ""}`}>
-        <nav className="mobileLinks" aria-label="Mobile navigation">
-          {LINKS.map((l) => (
-            <a
-              key={l.label}
-              href={l.href}
-              className={`mobileLink ${l.id && active === l.id ? "isActive" : ""}`}
-              onClick={() => handleNavClick(l.id)}
-            >
-              {l.label}
-            </a>
-          ))}
+        <nav className="mobileLinks">
+          {NAV_ITEMS.map((item) => renderLink(item, true))}
         </nav>
       </div>
     </header>
