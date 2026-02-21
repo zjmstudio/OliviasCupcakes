@@ -20,7 +20,7 @@
 
 .header {
   text-align: center;
-  margin-bottom: 28px;
+  margin-bottom: 70px;
 }
 
 
@@ -189,5 +189,13 @@
   .stage {
     order: 1;
   }
+}
+
+
+@media (max-width: 640px) {
+  .header {
+  text-align: center;
+  margin-bottom: 45px;
+}
 }
 

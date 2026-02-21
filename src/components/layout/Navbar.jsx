@@ -1,4 +1,3 @@
-// src/components/layout/Navbar.jsx
 import { useEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 
@@ -22,7 +21,6 @@ export default function Navbar() {
   const [cartHover, setCartHover] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
-  // Scroll spy only on homepage
   useEffect(() => {
     if (location.pathname !== "/") {
       setActive(null);
@@ -30,7 +28,9 @@ export default function Navbar() {
       return;
     }
 
-    const ids = NAV_ITEMS.filter((i) => i.type === "anchor" && i.id).map((i) => i.id);
+    const ids = NAV_ITEMS.filter((i) => i.type === "anchor" && i.id).map(
+      (i) => i.id
+    );
 
     const onScroll = () => {
       const y = window.scrollY + 120;
@@ -83,7 +83,9 @@ export default function Navbar() {
       <a
         key={item.label}
         href={item.href}
-        className={`${className} ${item.id && active === item.id ? "isActive" : ""}`}
+        className={`${className} ${
+          item.id && active === item.id ? "isActive" : ""
+        }`}
         onClick={() => handleAnchorClick(item.id)}
       >
         {item.label}
@@ -122,6 +124,7 @@ export default function Navbar() {
           className="hamburger"
           type="button"
           aria-expanded={open}
+          aria-controls="mobile-menu"
           onClick={() => setOpen((v) => !v)}
         >
           <span />
@@ -130,10 +133,12 @@ export default function Navbar() {
         </button>
       </div>
 
-      <div className={`mobilePanel ${open ? "open" : ""}`}>
-        <nav className="mobileLinks">
-          {NAV_ITEMS.map((item) => renderLink(item, true))}
-        </nav>
+      <div id="mobile-menu" className={`mobilePanel ${open ? "open" : ""}`}>
+        <div className="mobilePanelInner">
+          <nav className="mobileLinks" aria-label="Mobile navigation">
+            {NAV_ITEMS.map((item) => renderLink(item, true))}
+          </nav>
+        </div>
       </div>
     </header>
   );

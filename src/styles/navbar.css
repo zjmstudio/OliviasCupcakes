@@ -10,13 +10,11 @@
   top: 0;
   z-index: 50;
   background: #ffffff;
-  border-bottom: 1px solid transparent;
-  transition: border-color 0.2s ease;
+  border-bottom: none;
 }
 
-/* add this class to navWrap when scroll starts */
 .navWrap.isScrolled {
-  border-bottom-color: var(--nav-border);
+  border-bottom: 1px solid var(--nav-border);
 }
 
 .navBar {
@@ -49,17 +47,10 @@
   color: var(--nav-ink);
   text-decoration: none;
   padding: 10px 2px;
-  position: relative;
 }
-
-
 
 .navLink:hover {
   color: var(--nav-green);
-}
-
-.navLink:hover::after {
-  transform: scaleX(1);
 }
 
 .cartButton {
@@ -100,33 +91,7 @@
 
 .mobilePanel {
   display: none;
-  background: #ffffff;
-  border-bottom: 1px solid var(--nav-border);
-}
-
-.mobilePanel.open {
-  display: block;
-}
-
-.mobileLinks {
-  max-width: 1120px;
-  margin: 0 auto;
-  padding: 16px 20px 20px;
-  display: grid;
-  gap: 14px;
-}
-
-.mobileLink {
-  font-family: "Arapey", serif;
-  font-size: 16pt;
-  color: var(--nav-ink);
-  text-decoration: none;
-  padding: 10px 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-}
-
-.mobileLink.isActive {
-  border-bottom: 2px solid var(--nav-green);
+  border-bottom: none;
 }
 
 @media (max-width: 900px) {
@@ -141,5 +106,69 @@
   .hamburger {
     display: inline-block;
     justify-self: end;
+  }
+
+  .navWrap {
+    border-bottom: none;
+  }
+
+  .navWrap.isScrolled {
+    border-bottom: 1px solid var(--nav-border);
+  }
+
+  .mobilePanel {
+    display: grid;
+    background: #ffffff;
+    border-bottom: none;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 260ms cubic-bezier(0.22, 1, 0.36, 1);
+    pointer-events: none;
+  }
+
+  .mobilePanel.open {
+    grid-template-rows: 1fr;
+    pointer-events: auto;
+  }
+
+  .mobilePanelInner {
+    overflow: hidden;
+  }
+
+  .mobileLinks {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 16px 20px 20px;
+    display: grid;
+    gap: 14px;
+    opacity: 0;
+    transform: translateY(-8px);
+    transition:
+      opacity 180ms ease,
+      transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .mobilePanel.open .mobileLinks {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .mobileLink {
+    font-family: "Arapey", serif;
+    font-size: 16pt;
+    color: var(--nav-ink);
+    text-decoration: none;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  }
+
+  .mobileLink.isActive {
+    border-bottom: 1px solid var(--nav-green);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mobilePanel,
+    .mobileLinks {
+      transition: none;
+    }
   }
 }
