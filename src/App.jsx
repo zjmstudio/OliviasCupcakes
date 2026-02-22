@@ -4,6 +4,7 @@ import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 import Home from "./pages/Home";
 import Workshop from "./pages/Workshop1.jsx";
+import Cart from "./pages/Cart";
 
 
 export default function App() {
@@ -15,6 +16,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/workshop" element={<Workshop />} />
+        <Route path="/cart" element={<Cart />} />
       </Routes>
       <Footer />
     </>

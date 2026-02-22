@@ -1,8 +1,7 @@
-
+// src/pages/Workshop.jsx
 import { useEffect, useMemo, useState } from "react";
 import "../styles/workshop.css";
-
-
+import { useCart } from "../context/CartContext";
 
 const workshopImages = import.meta.glob(
   "../assets/images/workshop/**/*.{png,webp,jpg,jpeg}",
@@ -10,7 +9,6 @@ const workshopImages = import.meta.glob(
 );
 
 function getImg(category, key, preferredExt = "png") {
- 
   if (!key || key === "none") return null;
 
   const exts = preferredExt
@@ -27,8 +25,6 @@ function getImg(category, key, preferredExt = "png") {
 const OPTIONS = {
   base: ["vanilla", "chocolate", "lemon", "red_velvet"],
   frosting: ["cookies_cream", "chocolate", "vanilla", "strawberry", "cream_cheese"],
-
-
   topping1: [
     "none",
     "sprinkles",
@@ -49,22 +45,17 @@ const LABELS = {
 };
 
 const TITLES = {
-  // Shared
   none: "None",
 
-  // Bases
   vanilla: "Vanilla",
   chocolate: "Chocolate",
   lemon: "Lemon",
   red_velvet: "Red Velvet",
 
-  // Frosting
   cookies_cream: "Cookies & Cream",
-  vanilla_frosting: "Vanilla", 
   strawberry: "Strawberry",
   cream_cheese: "Cream Cheese",
 
-  // Toppings
   sprinkles: "Sprinkles",
   mms: "M&M’s",
   chocolate_drizzle: "Chocolate Drizzle",
@@ -72,7 +63,6 @@ const TITLES = {
   reeses_pieces: "Reese’s Pieces",
   coconut_shavings: "Coconut Shavings",
 
-  // Garnish
   cherry: "Cherry",
   mini_reeses_cup: "Mini Reese’s Cup",
   oreo_cookie: "Oreo Cookie",
@@ -120,17 +110,15 @@ function ControlRow({ label, valueTitle, onPrev, onNext }) {
   );
 }
 
-function PreviewLayer({ src, alt, zIndex, missingLabel }) {
-
+function PreviewLayer({ src, alt, zIndex, missingLabel, allowMissing = false }) {
   if (!src) {
-    if (!missingLabel) return null;
+    if (allowMissing) return null;
     return (
       <div className="layer layerMissing" style={{ zIndex }}>
         <div className="layerMissingInner">{missingLabel}</div>
       </div>
     );
   }
-
   return (
     <img
       className="layer"
@@ -143,14 +131,15 @@ function PreviewLayer({ src, alt, zIndex, missingLabel }) {
 }
 
 export default function Workshop() {
+  const { addToCart } = useCart();
+
   const [cupcake, setCupcake] = useState(() => ({
     base: OPTIONS.base[0],
-    frosting: OPTIONS.frosting[2], // vanilla
+    frosting: "vanilla",
     topping1: "none",
     topping2: "none",
   }));
 
-  // Central place to define which assets the CURRENT selection expects.
   const expected = useMemo(() => {
     return {
       base: { category: "base", key: cupcake.base },
@@ -169,15 +158,12 @@ export default function Workshop() {
     };
   }, [expected]);
 
-  // log a clear list of what’s missing and what filenames it expects.
   useEffect(() => {
     if (!import.meta.env.DEV) return;
 
     const missing = [];
     for (const [slot, { category, key }] of Object.entries(expected)) {
-      // Don't warn about "none" selections
-      if (!key || key === "none") continue;
-
+      if (key === "none") continue;
       if (!images[slot]) {
         missing.push({
           slot,
@@ -204,29 +190,27 @@ export default function Workshop() {
     }));
   }
 
-  function handleAddToCart() {
-    const payload = { product: "custom_cupcake", configuration: cupcake, qty: 1 };
-    console.log("Add to cart:", payload);
-
-    const key = "olivias_cart";
-    const existing = JSON.parse(localStorage.getItem(key) || "[]");
-    existing.push(payload);
-    localStorage.setItem(key, JSON.stringify(existing));
-  }
-
   const titleFor = (key) => TITLES[key] || key;
+
+  function handleAddToCart() {
+    addToCart({
+      type: "custom",
+      name: "Custom Cupcake",
+      config: cupcake,
+      qty: 1,
+      price: 4.95,
+    });
+  }
 
   return (
     <main className="workshop">
       <div className="workshopInner">
         <header className="header">
-         
           <h1>Build Your Cupcake</h1>
         </header>
 
         <section className="builder">
           <aside className="controls" aria-label="Cupcake customization controls">
-          
             <ControlRow
               label={LABELS.topping2}
               valueTitle={titleFor(cupcake.topping2)}
@@ -261,48 +245,28 @@ export default function Workshop() {
                   src={images.base}
                   alt=""
                   zIndex={10}
-                  missingLabel={
-                    images.base ? "" : `Missing: base/${expected.base.key}.png`
-                  }
+                  missingLabel={`Missing: base/${expected.base.key}.png`}
                 />
                 <PreviewLayer
                   src={images.frosting}
                   alt=""
                   zIndex={20}
-                  missingLabel={
-                    images.frosting ? "" : `Missing: frosting/${expected.frosting.key}.png`
-                  }
+                  missingLabel={`Missing: frosting/${expected.frosting.key}.png`}
                 />
                 <PreviewLayer
                   src={images.topping1}
                   alt=""
                   zIndex={30}
-                  missingLabel={
-                    expected.topping1.key === "none"
-                      ? ""
-                      : images.topping1
-                        ? ""
-                        : `Missing: topping1/${expected.topping1.key}.png`
-                  }
+                  missingLabel={`Missing: topping1/${expected.topping1.key}.png`}
+                  allowMissing={expected.topping1.key === "none"}
                 />
                 <PreviewLayer
                   src={images.topping2}
                   alt=""
                   zIndex={40}
-                  missingLabel={
-                    expected.topping2.key === "none"
-                      ? ""
-                      : images.topping2
-                        ? ""
-                        : `Missing: topping2/${expected.topping2.key}.png`
-                  }
+                  missingLabel={`Missing: topping2/${expected.topping2.key}.png`}
+                  allowMissing={expected.topping2.key === "none"}
                 />
-
-                {!images.base && (
-                  <div className="placeholder">
-                    Drop images into <span>src/assets/images/workshop</span>
-                  </div>
-                )}
               </div>
             </div>
 

@@ -1,20 +1,26 @@
 import { useEffect, useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 
 import logo from "../../assets/logo/olivias logo green.svg";
 import cartBlack from "../../assets/icons/shopping cart_black.svg";
 import cartGreen from "../../assets/icons/shopping cart_green.svg";
+import { useCart } from "../../context/CartContext";
+
 
 const NAV_ITEMS = [
-  { label: "Menu", type: "anchor", href: "#menu", id: "menu" },
-  { label: "Catering", type: "anchor", href: "#catering", id: "catering" },
+  { label: "Menu", type: "anchor", href: "/#menu", id: "menu" },
+  { label: "Catering", type: "anchor", href: "/#catering", id: "catering" },
   { label: "Locations", type: "anchor", href: "#", id: null },
   { label: "Contact", type: "anchor", href: "#", id: null },
   { label: "Cupcake Workshop", type: "route", to: "/workshop" },
 ];
 
+
+
 export default function Navbar() {
   const location = useLocation();
+  const { count } = useCart();
+  const navigate = useNavigate();
 
   const [active, setActive] = useState(null);
   const [open, setOpen] = useState(false);
@@ -111,14 +117,21 @@ export default function Navbar() {
         </nav>
 
         <button
-          className="cartButton"
-          type="button"
-          aria-label="View cart"
-          onMouseEnter={() => setCartHover(true)}
-          onMouseLeave={() => setCartHover(false)}
-        >
-          <img src={cartHover ? cartGreen : cartBlack} alt="" aria-hidden />
-        </button>
+  className="cartButton"
+  type="button"
+  aria-label="View cart"
+   onClick={() => navigate("/cart")}
+  onMouseEnter={() => setCartHover(true)}
+  onMouseLeave={() => setCartHover(false)}
+>
+  <img src={cartHover ? cartGreen : cartBlack} alt="" aria-hidden />
+
+  {count > 0 && (
+    <span className="cartBadge">
+      {count}
+    </span>
+  )}
+</button>
 
         <button
           className="hamburger"
