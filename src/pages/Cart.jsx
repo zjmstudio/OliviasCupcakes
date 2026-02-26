@@ -78,7 +78,7 @@ export default function Cart() {
         {items.length === 0 ? (
           <div className="cartEmpty">
             <p>Your cart is empty.</p>
-            <p>Add a custom cupcake from the Workshop or a Biggest Hit from the menu.</p>
+            <p>Add a custom cupcake from the Workshop.</p>
           </div>
         ) : (
           <div className="cartGrid">
